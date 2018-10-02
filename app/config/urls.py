@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from polls import views
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.index), # r'^$'가 장고2.0에선 ''로 대체가능
 ]
