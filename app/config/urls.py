@@ -14,9 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from polls import views
+from django.urls import path, include
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index), # r'^$'가 장고2.0에선 ''로 대체가능
+    path('polls/', include('polls.urls')),
 ]
