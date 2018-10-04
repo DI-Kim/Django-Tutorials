@@ -1,7 +1,6 @@
 from django.http import HttpResponse, Http404
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.template import loader
-
 from .models import Question
 
 
@@ -19,13 +18,16 @@ def index(request):
     # 생성한 리스트를 ', ' 문자열의 join메서드의 인수로 전달, output에 쉼표단위로 연결된 문자열을 할당
     # output = ', '.join([q.question_text for q in latest_question_list])
     # return HttpResponse(template.render(context, request))
-    return render(request, 'polls/index.html', context)
+    return redirect('polls:index')
 
 def detail(request, question_id):
-    try:
-        question = Question.objects.get(pk=question_id)
-    except Question.DoesNotExist:
-        raise Http404('Question does not exist')
+    # try:
+    #     question = Question.objects.get(pk=question_id)
+    # except Question.DoesNotExist:
+    #     raise Http404('Question does not exist')
+    # 위의 4줄을 줄여 쓴 코드
+    question = get_object_or_404(Question, pk=question_id)
+
     context = {
         'question': question
     }
