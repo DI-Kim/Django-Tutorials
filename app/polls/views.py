@@ -34,8 +34,16 @@ def detail(request, question_id):
     return render(request, 'polls/detail.html', context)
 
 def results(request, question_id):
-    response = "You're looking at the results of question %s."
-    return HttpResponse(response % question_id)
+    # question_id에 해당하는 Question인스턴스를 render함수의 context로 전달
+    # template은 'polls/results.html'을 사용
+    a = question_id
+
+    # Template에서는 전달받은 Question인스턴스에 속하는 Choice목록을 순회하며 보여줌
+    # 이 때, 각 Choice 아이템들의 'choice_text' 및 'votes'속성값도 같이 출력
+    context = {
+        'question': get_object_or_404(Question, pk = question_id)
+    }
+    return render(request, 'polls/results.html', context)
 
 def vote(request, question_id):
     #question_id가 pk인 Question객체를 DB로 부터 가져온 데이터로 생성
