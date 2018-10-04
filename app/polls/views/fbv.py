@@ -1,14 +1,12 @@
-from django.http import HttpResponse, Http404
+#fbv(function-based-view)
 from django.shortcuts import render, get_object_or_404, redirect
-from django.template import loader
-from .models import Question, Choice
+from ..models import Question, Choice
 
 
 def index(request):
     # Question 클래스에 대한 QuerySet을 가져옴
     # 게시일자 속성에 대한 내림차순 순서로 최대 5개 까지
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
-    # template = loader.get_template('polls/index.html')
     context = {
         'latest_question_list': latest_question_list,
     }
